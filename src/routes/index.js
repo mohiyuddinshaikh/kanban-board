@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "../pages/dashboard";
 import Login from "../pages/login";
 import Register from "../pages/register";
+import TaskManager from "../pages/taskManager";
 
 const Routing = () => {
   return (
@@ -11,6 +12,7 @@ const Routing = () => {
         <Route exact path="/signup" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/tasks" element={<TaskManager />} />
       </Routes>
     </Router>
   );

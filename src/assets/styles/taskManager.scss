@@ -1,0 +1,35 @@
+.tasks__container {
+  padding: 30px 50px;
+  // display: flex;
+  // flex-wrap: wrap;
+  // background-color: antiquewhite;
+  // justify-content: space-around;
+}
+
+.task__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+
+  .title {
+    padding: 5px 0;
+  }
+}
+
+.task__primary {
+  width: 95%;
+  padding: 10px 5px;
+  border: 1px solid black;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+
+  .icon__container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}

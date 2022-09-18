@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -8,8 +9,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { users } from "../data/users";
+import * as userActions from "../store/reducers/user.slice";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
@@ -35,6 +38,12 @@ export default function Login() {
     }
 
     // reduxDispatch()
+
+    let payload = {
+      ...userRecord[0],
+    };
+    delete payload.password;
+    dispatch(userActions.update(payload));
     goToDashboard();
   };
 

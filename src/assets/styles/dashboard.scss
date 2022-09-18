@@ -1,0 +1,13 @@
+.dashboard__container {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.dashboard__task--header {
+  padding: 40px 0;
+}
+
+.dashboard__card--title {
+  padding: 7px 0;
+}

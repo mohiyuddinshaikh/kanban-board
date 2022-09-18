@@ -11,7 +11,7 @@ export default function ResponsiveHeader() {
     navigate("/");
   };
 
-  const [viewAll, setViewAll] = useState(true);
+  const [viewAll, setViewAll] = useState(false);
 
   let sidebarClass = viewAll ? "sidebar open" : "sidebar";
 
@@ -39,7 +39,7 @@ export default function ResponsiveHeader() {
           pointerEvents: "all",
           //   width:
           //     isMobile && viewAll ? "70%" : !isMobile && viewAll ? "30%" : "",
-          width: viewAll ? "30%" : "",
+          width: viewAll ? "15%" : "",
         }}
         className={sidebarClass}
       >

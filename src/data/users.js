@@ -5,6 +5,7 @@ const users = [
     name: "Tyrion",
     email: "tyrion@lannister.com",
     displayPicture: "string",
+    id: 1,
   },
   {
     userName: "ned",
@@ -12,6 +13,7 @@ const users = [
     name: "Ned",
     email: "ned@stark.com",
     displayPicture: "string",
+    id: 2,
   },
   {
     userName: "stannis",
@@ -19,6 +21,7 @@ const users = [
     name: "Stannis",
     email: "stannis@baratheon.com",
     displayPicture: "string",
+    id: 3,
   },
 ];
 
