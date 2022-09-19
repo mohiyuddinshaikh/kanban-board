@@ -89,9 +89,9 @@ export default function Dashboard() {
           alignItems="flex-end"
           justifyContent="center"
         >
-          {dashboardDataContainers.map((item) => {
+          {dashboardDataContainers.map((item, index) => {
             return (
-              <Grid item xs={12} sm={5} md={2}>
+              <Grid item xs={12} sm={5} md={2} key={index}>
                 <Box
                   sx={{
                     display: "flex",

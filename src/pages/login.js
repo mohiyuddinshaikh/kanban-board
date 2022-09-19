@@ -20,17 +20,12 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
     const userName = data.get("userName");
     const password = data.get("password");
-    console.log({
-      username: data.get("userName"),
-      password: data.get("password"),
-    });
 
     const userRecord = users.filter(
       (user) =>
         (user.userName === userName || user.email === userName) &&
         user.password === password
     );
-    console.log("userRecord :>> ", userRecord);
 
     if (!userRecord.length) {
       alert("Invalid username/email or password");

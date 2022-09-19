@@ -1,5 +1,5 @@
 .tasks__container {
-  padding: 30px 50px;
+  padding: 30px 0px;
   // display: flex;
   // flex-wrap: wrap;
   // background-color: antiquewhite;
@@ -17,6 +17,11 @@
   .title {
     padding: 5px 0;
   }
+
+  .no--tasks {
+    color: gray;
+    margin-top: 10px;
+  }
 }
 
 .task__primary {
@@ -32,4 +37,10 @@
     justify-content: flex-end;
     gap: 8px;
   }
+}
+
+.task--manager__body {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 50px;
 }

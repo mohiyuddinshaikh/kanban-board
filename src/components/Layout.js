@@ -24,8 +24,6 @@ function Layout(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [currentPage, setCurrentPage] = useState(null);
 
-  console.log("currentPage :>> ", currentPage);
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

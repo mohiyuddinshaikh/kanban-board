@@ -7,4 +7,10 @@ const totalStages = [
   { stage: 3, name: "Done" },
 ];
 
-export { dashboardDataContainers, totalStages };
+const priorities = [
+  { id: 0, name: "low" },
+  { id: 1, name: "medium" },
+  { id: 2, name: "high" },
+];
+
+export { dashboardDataContainers, totalStages, priorities };

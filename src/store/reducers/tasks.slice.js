@@ -10,14 +10,23 @@ export const tasksSlice = createSlice({
       return { tasks: [...action.payload] };
     },
     addTask: (state, action) => {
-      return { ...state, tasks: { ...state.tasks, ...action.payload } };
+      return { ...state, tasks: [...state.tasks, action.payload] };
     },
+    // editTask: (state, action) => {
+    //   console.log("action.payload", action.payload);
+    //   return {
+    //     ...state,
+    //     tasks: [
+    //       ...state.tasks.map((item) =>
+    //         item.name === action.payload.name ? { ...action.payload } : item
+    //       ),
+    //     ],
+    //   };
+    // },
     editTask: (state, action) => {
       return {
         ...state,
-        tasks: state.tasks.map((item) =>
-          item.name === action.payload.name ? { ...action.payload } : item
-        ),
+        tasks: [...action.payload],
       };
     },
     deleteTask: (state, action) => {

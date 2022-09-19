@@ -30,7 +30,7 @@ export default function ResponsiveHeader() {
         >
           <MenuIcon />
         </IconButton>
-        Kanban
+        <span onClick={goToHome}>Kanban</span>
       </div>
 
       {/*  */}
