@@ -4,7 +4,7 @@ const users = [
     password: "123456",
     name: "Tyrion",
     email: "tyrion@lannister.com",
-    displayPicture: "string",
+    displayPicture: {},
     id: 1,
   },
   {
@@ -12,7 +12,7 @@ const users = [
     password: "123456",
     name: "Ned",
     email: "ned@stark.com",
-    displayPicture: "string",
+    displayPicture: {},
     id: 2,
   },
   {
@@ -20,7 +20,7 @@ const users = [
     password: "123456",
     name: "Stannis",
     email: "stannis@baratheon.com",
-    displayPicture: "string",
+    displayPicture: {},
     id: 3,
   },
 ];

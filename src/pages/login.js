@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,16 +10,64 @@ import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { users } from "../data/users";
 import * as userActions from "../store/reducers/user.slice";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { AlertTitle } from "@mui/material";
+import "../assets/styles/register.scss";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const alertInitialState = {
+    open: false,
+    message: null,
+  };
+
+  const [alert, setAlert] = useState(alertInitialState);
+  const [error, setError] = useState({
+    userName: false,
+    password: false,
+  });
+
+  const checkLoginValidations = (userName, password) => {
+    let hasError = {
+      userName: false,
+      password: false,
+    };
+    if (!userName) {
+      hasError = {
+        ...hasError,
+        userName: true,
+      };
+    }
+    if (!password) {
+      hasError = {
+        ...hasError,
+        password: true,
+      };
+    }
+    setError(hasError);
+    if (hasError?.userName || hasError?.password) {
+      setAlert({
+        open: true,
+        message: "Please fill all the fields",
+      });
+      return true;
+    }
+    return false;
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const userName = data.get("userName");
     const password = data.get("password");
+
+    const hasError = checkLoginValidations(userName, password);
+    if (hasError) {
+      return;
+    }
 
     const userRecord = users.filter(
       (user) =>
@@ -28,11 +76,12 @@ export default function Login() {
     );
 
     if (!userRecord.length) {
-      alert("Invalid username/email or password");
+      setAlert({
+        open: true,
+        message: "Invalid credentials",
+      });
       return;
     }
-
-    // reduxDispatch()
 
     let payload = {
       ...userRecord[0],
@@ -74,6 +123,8 @@ export default function Login() {
                 name="userName"
                 autoComplete="family-name"
                 size="small"
+                error={error?.userName}
+                helperText={error?.userName && "Please Enter Username / Email"}
               />
             </Grid>
 
@@ -87,6 +138,8 @@ export default function Login() {
                 id="password"
                 autoComplete="new-password"
                 size="small"
+                error={error?.password}
+                helperText={error?.password && "Please Enter Password"}
               />
             </Grid>
           </Grid>
@@ -100,13 +153,38 @@ export default function Login() {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link variant="body2" onClick={redirectToRegister}>
+              <Link
+                variant="body2"
+                onClick={redirectToRegister}
+                className="helper--text"
+              >
                 Not a member? Register
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      {alert?.open ? (
+        <Snackbar
+          open={alert?.open}
+          autoHideDuration={6000}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <Alert
+            onClose={() => {
+              setAlert(alertInitialState);
+            }}
+            severity="error"
+            sx={{ width: 200 }}
+          >
+            <AlertTitle>Error</AlertTitle>
+            {alert?.message}
+          </Alert>
+        </Snackbar>
+      ) : null}
     </Container>
   );
 }

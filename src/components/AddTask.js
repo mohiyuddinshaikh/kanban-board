@@ -32,13 +32,75 @@ export default function AddTaskForm(props) {
 
   const { tasks } = useSelector((state) => state.tasks);
 
+  const initialErrorState = {
+    name: false,
+    stage: false,
+    priority: false,
+    deadline: false,
+  };
+
   const [name, setName] = useState(task?.name || null);
   const [stage, setStage] = useState(task?.stage || FIRST_STAGE);
   const [priority, setPriority] = useState(task?.priority || null);
   const [deadline, setDeadline] = useState(task?.deadline || null);
+  const [error, setError] = useState(initialErrorState);
 
   const handleDeadline = (date) => {
     setDeadline(date.format());
+  };
+
+  const doesTaskNameExist = (taskName) => {
+    const filteredTask = tasks.filter((task) => task.name === taskName);
+    if (filteredTask?.length) {
+      return true;
+    }
+    return false;
+  };
+
+  const validateTasks = (data) => {
+    const { name, stage, priority, deadline } = data;
+
+    let hasError = { ...initialErrorState };
+
+    if (!name) {
+      hasError = {
+        ...hasError,
+        name: "Please enter task name",
+      };
+    }
+    if (!priority) {
+      hasError = {
+        ...hasError,
+        priority: "Please enter priority",
+      };
+    }
+    if (!deadline) {
+      hasError = {
+        ...hasError,
+        deadline: "Please enter deadline",
+      };
+    }
+
+    if (name && doesTaskNameExist(name)) {
+      hasError = {
+        ...hasError,
+        name: "Task name already exists",
+      };
+    }
+
+    if (hasError?.name || hasError?.priority || hasError?.deadline) {
+      setError(hasError);
+      return true;
+    }
+
+    setError(initialErrorState);
+    return false;
+  };
+
+  const clearTaskForm = () => {
+    setName(null);
+    setDeadline(null);
+    setPriority(null);
   };
 
   const handleSubmit = () => {
@@ -48,6 +110,12 @@ export default function AddTaskForm(props) {
       priority,
       deadline,
     };
+
+    const hasError = validateTasks(payload);
+    if (hasError) {
+      return;
+    }
+
     if (edit) {
       let tempTasks = [...tasks];
       const updatedTasks = tempTasks.map((element) => {
@@ -56,8 +124,10 @@ export default function AddTaskForm(props) {
         } else return element;
       });
       dispatch(taskActions.editTask(updatedTasks));
+      clearTaskForm();
     } else {
       dispatch(taskActions.addTask(payload));
+      clearTaskForm();
     }
     closeForm();
   };
@@ -71,12 +141,14 @@ export default function AddTaskForm(props) {
             required
             fullWidth
             id="name"
-            label="Name"
+            label="Task Name"
             name="name"
             size="small"
             className="form--input"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            error={error?.name}
+            helperText={error?.name}
           />
           <div className="form--input">
             <FormControl fullWidth>
@@ -109,6 +181,8 @@ export default function AddTaskForm(props) {
                 required
                 size="small"
                 onChange={(e) => setPriority(e.target.value)}
+                error={error?.priority}
+                helperText={error?.priority}
               >
                 {priorities.map((item, index) => (
                   <MenuItem key={index} value={item?.id}>
@@ -127,7 +201,14 @@ export default function AddTaskForm(props) {
                   handleDeadline(date);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} size="small" fullWidth />
+                  <TextField
+                    {...params}
+                    size="small"
+                    fullWidth
+                    required
+                    error={error?.deadline}
+                    helperText={error?.deadline}
+                  />
                 )}
               />
             </LocalizationProvider>

@@ -81,7 +81,7 @@ export default function Dashboard() {
     >
       <ResponsiveHeader />
       <div className="dashboard__container">
-        <div className="dashboard__title">Hello, Mohiyuddin !</div>
+        <div className="dashboard__title">Hello, {user?.name || "Guest"} !</div>
         <div className="dashboard__task--header">Tasks</div>
         <Grid
           container

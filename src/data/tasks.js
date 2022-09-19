@@ -17,7 +17,7 @@ const userTasks = [
       {
         stage: 2,
         name: "moin 456",
-        priority: 3,
+        priority: 2,
         deadline: "2022-09-18T12:00:00+05:30",
       },
       {

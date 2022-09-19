@@ -13,4 +13,6 @@ const priorities = [
   { id: 2, name: "high" },
 ];
 
-export { dashboardDataContainers, totalStages, priorities };
+const MENU_ITEMS = ["dashboard", "tasks"];
+
+export { dashboardDataContainers, totalStages, priorities, MENU_ITEMS };
