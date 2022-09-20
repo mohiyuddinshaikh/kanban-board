@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { dashboardDataContainers } from "../assets/constants/constants";
+import {
+  dashboardDataContainers,
+  PRIMARY_COLOR,
+} from "../assets/constants/constants";
 import ResponsiveHeader from "../components/ResponsiveHeader";
 import { userTasks } from "../data/tasks";
 import { users } from "../data/users";
@@ -9,6 +12,7 @@ import "../assets/styles/dashboard.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as taskActions from "../store/reducers/tasks.slice";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -26,6 +30,12 @@ export default function Dashboard() {
       fetchTasks();
     }
   }, [user]);
+
+  useEffect(() => {
+    if (!user?.name) {
+      goToHome();
+    }
+  }, []);
 
   const fetchTasks = () => {
     const filteredUser = userTasks.filter(
@@ -71,6 +81,30 @@ export default function Dashboard() {
     navigate("/tasks");
   };
 
+  const goToHome = () => {
+    navigate("/");
+  };
+
+  const getBorderTopColor = (index) => {
+    switch (index) {
+      case 0:
+        return "#CBC3E3";
+        break;
+
+      case 1:
+        return "#EEDC82";
+        break;
+
+      case 2:
+        return "#AFE1AF";
+        break;
+
+      default:
+        return PRIMARY_COLOR;
+        break;
+    }
+  };
+
   return (
     <div
       style={{
@@ -82,37 +116,44 @@ export default function Dashboard() {
       <ResponsiveHeader />
       <div className="dashboard__container">
         <div className="dashboard__title">Hello, {user?.name || "Guest"} !</div>
-        <div className="dashboard__task--header">Tasks</div>
+        <div className="dashboard__task--header">
+          <div className="title">Tasks :</div>
+          <div className="button">
+            <Button
+              onClick={goToTaskManager}
+              variant="contained"
+              color="primary"
+            >
+              Task Manager
+              <ArrowForwardIcon className="icon" fontSize="small" />
+            </Button>
+          </div>
+        </div>
         <Grid
           container
           spacing={5}
           alignItems="flex-end"
-          justifyContent="center"
+          className="info--card__container"
         >
           {dashboardDataContainers.map((item, index) => {
             return (
               <Grid item xs={12} sm={5} md={2} key={index}>
                 <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "1px solid black",
-                    flexDirection: "column",
-                    padding: "10px 0",
+                  className="info-card"
+                  style={{
+                    borderTopColor: getBorderTopColor(index),
                   }}
                 >
-                  <Typography>{item}</Typography>
+                  <Typography className="title">{item}</Typography>
                   <Divider />
-                  <div className="dashboard__card--title">
-                    {tasks && getCardTitle(item)}
+                  <div className="dashboard__card--score">
+                    {tasks ? getCardTitle(item) : 0}
                   </div>
                 </Box>
               </Grid>
             );
           })}
         </Grid>
-        <button onClick={goToTaskManager}>Go to Tasks</button>
       </div>
     </div>
   );

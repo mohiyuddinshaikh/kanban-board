@@ -8,10 +8,20 @@ $sidebarBackgroundColor: #003153;
   z-index: 999;
 
   .logoText {
-    margin-left: 40px;
     font-size: x-large;
     cursor: pointer;
     width: fit-content;
+  }
+
+  .header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+
+    .logout__text {
+      cursor: pointer;
+    }
   }
 }
 
@@ -89,4 +99,11 @@ $sidebarBackgroundColor: #003153;
 
 .sidebar.open {
   left: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .sidebar {
+    width: 40% !important;
+    left: calc(-40% - 70px);
+  }
 }

@@ -5,9 +5,26 @@ import { totalStages } from "../assets/constants/constants";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import TaskContainer from "../components/TaskContainer";
 import AddTaskForm from "../components/AddTask";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function TaskManager() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
+
   const [addTask, setAddTask] = useState(false);
+
+  useEffect(() => {
+    if (!user?.name) {
+      goToHome();
+    }
+  }, []);
+
+  const goToHome = () => {
+    navigate("/");
+  };
 
   const handleAddTask = () => {
     setAddTask(true);

@@ -28,18 +28,6 @@ export default function Task(props) {
     setAddTask(false);
   };
 
-  // const handleMoveToPreviousStage = () => {
-  //   let tempTask = { ...task };
-  //   tempTask.stage -= 1;
-  //   dispatch(taskActions.editTask(tempTask));
-  // };
-
-  // const handleMoveToNextStage = () => {
-  //   let tempTask = { ...task };
-  //   tempTask.stage += 1;
-  //   dispatch(taskActions.editTask(tempTask));
-  // };
-
   const handleMove = (type) => {
     let updatedTasks = [];
     tasks.forEach((element) => {

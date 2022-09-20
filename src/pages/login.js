@@ -100,20 +100,11 @@ export default function Login() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleLogin} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
+    <Container maxWidth="xs" className="login-container">
+      <div className="main-container">
+        <div className="title">Login</div>
+        <form onSubmit={handleLogin} className="form-container">
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 // required
@@ -162,8 +153,8 @@ export default function Login() {
               </Link>
             </Grid>
           </Grid>
-        </Box>
-      </Box>
+        </form>
+      </div>
       {alert?.open ? (
         <Snackbar
           open={alert?.open}

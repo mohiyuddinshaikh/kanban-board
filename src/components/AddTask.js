@@ -22,6 +22,7 @@ import "../assets/styles/createTask.scss";
 import { useDispatch, useSelector } from "react-redux";
 import * as taskActions from "../store/reducers/tasks.slice";
 import { MobileDateTimePicker } from "@mui/x-date-pickers";
+import CloseIcon from "@mui/icons-material/Close";
 
 const FIRST_STAGE = totalStages[0].stage;
 
@@ -103,6 +104,10 @@ export default function AddTaskForm(props) {
     setPriority(null);
   };
 
+  const clearErrorState = () => {
+    setError(initialErrorState);
+  };
+
   const handleSubmit = () => {
     const payload = {
       name,
@@ -132,9 +137,20 @@ export default function AddTaskForm(props) {
     closeForm();
   };
 
+  const handleClose = () => {
+    clearTaskForm();
+    clearErrorState();
+    closeForm();
+  };
+
   return (
-    <Dialog open={open} onClose={closeForm} maxWidth="sm" fullWidth>
-      <DialogTitle>Create Task</DialogTitle>
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <DialogTitle className="dialogTitle">
+        <div>{edit ? "Edit" : "Create"} Task</div>
+        <div>
+          <CloseIcon className="icon" onClick={handleClose} />
+        </div>
+      </DialogTitle>
       <DialogContent>
         <div onSubmit={handleSubmit} className="create--task__form">
           <TextField

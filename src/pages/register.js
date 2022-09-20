@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import * as userActions from "../store/reducers/user.slice";
 import { users } from "../data/users";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import "../assets/styles/register.scss";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -70,17 +71,17 @@ export default function Register() {
       password: formData.get("password"),
       // displayPicture: formData.get("profile-picture"),
     };
-    console.log("data", data);
+
     const hasError = checkSignupValidations(data);
     if (hasError) {
       return;
     }
-    console.log("success");
 
     let payload = {
       ...data,
     };
     delete payload.password;
+
     dispatch(userActions.update(payload));
     goToDashboard();
   };
@@ -93,7 +94,6 @@ export default function Register() {
   }
 
   function validatePhone(contact) {
-    console.log("contact", contact);
     if (/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/.test(contact)) {
       return true;
     }
@@ -211,22 +211,14 @@ export default function Register() {
   };
 
   const clearFile = () => {
-    console.log("fileRef", fileRef);
     setSelectedFile(null);
     setPreview(null);
     fileRef.current.value = null;
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+    <Container className="login-container" maxWidth="xs">
+      <div className="main-container">
         <Typography component="h1" variant="h5">
           Register
         </Typography>
@@ -346,7 +338,7 @@ export default function Register() {
             </Grid>
           </Grid>
         </Box>
-      </Box>
+      </div>
     </Container>
   );
 }

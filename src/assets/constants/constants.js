@@ -15,4 +15,12 @@ const priorities = [
 
 const MENU_ITEMS = ["dashboard", "tasks"];
 
-export { dashboardDataContainers, totalStages, priorities, MENU_ITEMS };
+const PRIMARY_COLOR = "#5a4ad1";
+
+export {
+  dashboardDataContainers,
+  totalStages,
+  priorities,
+  MENU_ITEMS,
+  PRIMARY_COLOR,
+};

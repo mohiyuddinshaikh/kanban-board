@@ -4,9 +4,13 @@ import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { MENU_ITEMS } from "../assets/constants/constants";
+import { useDispatch } from "react-redux";
+import * as userActions from "../store/reducers/user.slice";
+import * as taskActions from "../store/reducers/tasks.slice";
 
 export default function ResponsiveHeader() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const goToHome = () => {
     navigate("/");
@@ -33,26 +37,35 @@ export default function ResponsiveHeader() {
     navigate(`/${route}`);
   };
 
+  const handleLogout = () => {
+    dispatch(userActions.logout());
+    dispatch(taskActions.clearTasks());
+    navigate("/");
+  };
+
   return (
     <div className="header">
-      <div className="logoText">
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-        >
-          <MenuIcon />
-        </IconButton>
-        <span onClick={goToHome}>Kanban</span>
+      <div className="header__container">
+        <div className="logoText">
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+          <span onClick={goToHome}>Kanban</span>
+        </div>
+        <div className="logout__text" onClick={handleLogout}>
+          Logout
+        </div>
       </div>
 
       {/*  */}
       <div
         style={{
           pointerEvents: "all",
-          //   width:
-          //     isMobile && viewSidebar ? "70%" : !isMobile && viewSidebar ? "30%" : "",
           width: viewSidebar ? "15%" : "",
         }}
         className={sidebarClass}
