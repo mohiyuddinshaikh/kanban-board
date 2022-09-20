@@ -43,6 +43,10 @@ export default function ResponsiveHeader() {
     navigate("/");
   };
 
+  const goToDashboard = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <div className="header">
       <div className="header__container">
@@ -55,7 +59,7 @@ export default function ResponsiveHeader() {
           >
             <MenuIcon />
           </IconButton>
-          <span onClick={goToHome}>Kanban</span>
+          <span onClick={goToDashboard}>Kanban</span>
         </div>
         <div className="logout__text" onClick={handleLogout}>
           Logout

@@ -4,37 +4,37 @@ const userTasks = [
     tasks: [
       {
         stage: 1,
-        name: "moin 123",
+        name: "Schema Designing",
         priority: 1,
         deadline: "2022-09-18T12:00:00+05:30",
       },
       {
         stage: 2,
-        name: "moin 345",
+        name: "Wireframing",
         priority: 2,
         deadline: "2022-09-18T12:00:00+05:30",
       },
       {
         stage: 2,
-        name: "moin 456",
+        name: "Schema Planning",
         priority: 2,
         deadline: "2022-09-18T12:00:00+05:30",
       },
       {
         stage: 3,
-        name: "moin 567",
+        name: "Gather Requirements",
         priority: 2,
         deadline: "2022-09-18T12:00:00+05:30",
       },
       {
         stage: 1,
-        name: "moin 678",
+        name: "Create APIs",
         priority: 1,
         deadline: "2022-09-18T12:00:00+05:30",
       },
       {
         stage: 0,
-        name: "moin 789",
+        name: "UI Development",
         priority: 2,
         deadline: "2022-09-18T12:00:00+05:30",
       },

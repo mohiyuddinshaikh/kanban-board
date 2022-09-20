@@ -56,7 +56,7 @@ export default function Task(props) {
       {...taskDragHandleProp}
       ref={taskRefProp}
     >
-      <div className="title">{task.name}</div>
+      <div className="task__title">{task.name}</div>
       <div className="icon__container">
         <IconButton
           color="inherit"

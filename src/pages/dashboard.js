@@ -18,10 +18,11 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  const { tasks } = useSelector((state) => state.tasks);
 
   const navigate = useNavigate();
 
-  const [tasks, setTasks] = useState(null);
+  // const [tasks, setTasks] = useState(null);
 
   const viewAll = true;
 
@@ -42,7 +43,7 @@ export default function Dashboard() {
       (taskItem) => taskItem.email === user?.email
     );
     if (filteredUser?.length) {
-      setTasks(filteredUser[0]?.tasks);
+      // setTasks(filteredUser[0]?.tasks);
       dispatch(taskActions.addInitial(filteredUser[0]?.tasks));
     }
   };
