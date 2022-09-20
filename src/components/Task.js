@@ -14,7 +14,8 @@ import AddTaskForm from "./AddTask";
 export default function Task(props) {
   const dispatch = useDispatch();
 
-  const { task, index } = props;
+  const { task, index, taskRefProp, taskDraggableProp, taskDragHandleProp } =
+    props;
 
   const { tasks } = useSelector((state) => state.tasks);
 
@@ -48,7 +49,13 @@ export default function Task(props) {
   };
 
   return (
-    <div className="task__primary" key={task?.name}>
+    <div
+      className="task__primary"
+      key={task?.name}
+      {...taskDraggableProp}
+      {...taskDragHandleProp}
+      ref={taskRefProp}
+    >
       <div className="title">{task.name}</div>
       <div className="icon__container">
         <IconButton
