@@ -53,7 +53,16 @@ export default function AddTaskForm(props) {
   const doesTaskNameExist = (taskName) => {
     const filteredTask = tasks.filter((task) => task.name === taskName);
     if (filteredTask?.length) {
-      return true;
+      if (!edit) {
+        return true;
+      } else {
+        const existingTask = filteredTask[0];
+        if (existingTask.name === task?.name) {
+          return false;
+        } else {
+          return true;
+        }
+      }
     }
     return false;
   };
@@ -129,7 +138,6 @@ export default function AddTaskForm(props) {
         } else return element;
       });
       dispatch(taskActions.editTask(updatedTasks));
-      clearTaskForm();
     } else {
       dispatch(taskActions.addTask(payload));
       clearTaskForm();

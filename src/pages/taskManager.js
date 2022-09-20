@@ -70,6 +70,7 @@ export default function TaskManager() {
 
       dispatch(taskActions.editTask(updatedTasks));
     }
+    setShowDeleteIcon(false);
   };
 
   const handleDragStart = (result) => {
