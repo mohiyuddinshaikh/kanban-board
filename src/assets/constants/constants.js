@@ -8,9 +8,9 @@ const totalStages = [
 ];
 
 const priorities = [
-  { id: 0, name: "low" },
-  { id: 1, name: "medium" },
-  { id: 2, name: "high" },
+  { id: 1, name: "low" },
+  { id: 2, name: "medium" },
+  { id: 3, name: "high" },
 ];
 
 const MENU_ITEMS = ["dashboard", "tasks"];

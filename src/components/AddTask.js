@@ -138,7 +138,9 @@ export default function AddTaskForm(props) {
   };
 
   const handleClose = () => {
-    clearTaskForm();
+    if (!edit) {
+      clearTaskForm();
+    }
     clearErrorState();
     closeForm();
   };

@@ -35,7 +35,7 @@ const userTasks = [
       {
         stage: 0,
         name: "UI Development",
-        priority: 2,
+        priority: 1,
         deadline: "2022-09-18T12:00:00+05:30",
       },
     ],
