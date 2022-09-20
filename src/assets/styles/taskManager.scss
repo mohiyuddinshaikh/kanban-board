@@ -60,3 +60,13 @@ $textColor: #36454f;
   flex-direction: column;
   padding: 30px 50px;
 }
+
+.interaction__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .icon {
+    font-size: 30px;
+  }
+}

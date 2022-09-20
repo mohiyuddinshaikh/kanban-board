@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Droppable } from "react-beautiful-dnd";
 import * as taskActions from "../store/reducers/tasks.slice";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function TaskManager() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function TaskManager() {
   const { tasks } = useSelector((state) => state.tasks);
 
   const [addTask, setAddTask] = useState(false);
+  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
 
   useEffect(() => {
     if (!user?.name) {
@@ -38,16 +40,6 @@ export default function TaskManager() {
     setAddTask(false);
   };
 
-  const AddTask = () => {
-    return (
-      <div>
-        <Button onClick={handleAddTask} variant="contained" color="primary">
-          Create Task
-        </Button>
-      </div>
-    );
-  };
-
   const getStageIndex = (stageName) => {
     const record = totalStages.filter((item) => item.name === stageName);
     return record[0]?.stage;
@@ -64,24 +56,53 @@ export default function TaskManager() {
       return;
     }
 
-    const updatedTasks = tasks.map((element) => {
-      if (element.name === draggableId) {
-        return {
-          ...element,
-          stage: getStageIndex(destination?.droppableId),
-        };
-      } else return element;
-    });
+    if (destination.droppableId === "delete") {
+      dispatch(taskActions.deleteTask({ name: draggableId }));
+    } else {
+      const updatedTasks = tasks.map((element) => {
+        if (element.name === draggableId) {
+          return {
+            ...element,
+            stage: getStageIndex(destination?.droppableId),
+          };
+        } else return element;
+      });
 
-    dispatch(taskActions.editTask(updatedTasks));
+      dispatch(taskActions.editTask(updatedTasks));
+    }
+  };
+
+  const handleDragStart = (result) => {
+    if (!result) {
+      return;
+    }
+    setShowDeleteIcon(true);
   };
 
   return (
     <div>
-      <DragDropContext onDragEnd={(result) => handleDragEnd(result)}>
+      <DragDropContext
+        onDragEnd={(result) => handleDragEnd(result)}
+        onDragStart={(result) => handleDragStart(result)}
+      >
         <ResponsiveHeader />
         <div className="task--manager__body">
-          <AddTask />
+          <div className="interaction__container">
+            <Button onClick={handleAddTask} variant="contained" color="primary">
+              Create Task
+            </Button>
+            <Droppable droppableId="delete">
+              {(provided, snapshot) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {showDeleteIcon ? (
+                    <DeleteIcon className="icon" />
+                  ) : (
+                    <div></div>
+                  )}
+                </div>
+              )}
+            </Droppable>
+          </div>
           <Grid
             container
             className="tasks__container"
