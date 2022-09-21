@@ -4,8 +4,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { users } from "../data/users";
@@ -107,7 +105,6 @@ export default function Login() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
-                // required
                 fullWidth
                 id="lastName"
                 label="Username / Email"
@@ -121,7 +118,6 @@ export default function Login() {
 
             <Grid item xs={12}>
               <TextField
-                // required
                 fullWidth
                 name="password"
                 label="Password"

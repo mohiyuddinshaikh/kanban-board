@@ -7,9 +7,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
-import { AlertTitle } from "@mui/material";
 import { useDispatch } from "react-redux";
 import * as userActions from "../store/reducers/user.slice";
 import { users } from "../data/users";
@@ -20,11 +17,6 @@ export default function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const alertInitialState = {
-    open: false,
-    message: null,
-  };
-
   const initialErrorState = {
     name: false,
     userName: false,
@@ -33,7 +25,6 @@ export default function Register() {
     contact: false,
   };
 
-  const [alert, setAlert] = useState(alertInitialState);
   const [error, setError] = useState(initialErrorState);
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);

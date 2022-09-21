@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ResponsiveHeader from "../components/ResponsiveHeader";
 import "../assets/styles/taskManager.scss";
 import { totalStages } from "../assets/constants/constants";
-import { Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import TaskContainer from "../components/TaskContainer";
 import AddTaskForm from "../components/AddTask";
 import { useDispatch, useSelector } from "react-redux";

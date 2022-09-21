@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import { Container } from "@mui/system";
 import {
   dashboardDataContainers,
   PRIMARY_COLOR,
 } from "../assets/constants/constants";
 import ResponsiveHeader from "../components/ResponsiveHeader";
 import { userTasks } from "../data/tasks";
-import { users } from "../data/users";
 import "../assets/styles/dashboard.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,10 +19,6 @@ export default function Dashboard() {
   const { tasks } = useSelector((state) => state.tasks);
 
   const navigate = useNavigate();
-
-  // const [tasks, setTasks] = useState(null);
-
-  const viewAll = true;
 
   useEffect(() => {
     if (user && !tasks?.length) {
@@ -43,7 +37,6 @@ export default function Dashboard() {
       (taskItem) => taskItem.email === user?.email
     );
     if (filteredUser?.length) {
-      // setTasks(filteredUser[0]?.tasks);
       dispatch(taskActions.addInitial(filteredUser[0]?.tasks));
     }
   };
@@ -109,8 +102,6 @@ export default function Dashboard() {
   return (
     <div
       style={{
-        // width: viewAll ? '85%' : '100%',
-        // marginLeft: viewAll ? '15%' : 0,
         width: "100%",
       }}
     >
