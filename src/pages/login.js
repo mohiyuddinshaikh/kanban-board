@@ -12,6 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { AlertTitle } from "@mui/material";
 import "../assets/styles/register.scss";
+import Reaptcha from "reaptcha";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -27,8 +28,16 @@ export default function Login() {
     userName: false,
     password: false,
   });
+  const [verified, setVerified] = useState(false);
 
   const checkLoginValidations = (userName, password) => {
+    if (!verified) {
+      setAlert({
+        open: true,
+        message: "Please resolve captcha",
+      });
+      return true;
+    }
     let hasError = {
       userName: false,
       password: false,
@@ -97,6 +106,10 @@ export default function Login() {
     navigate("/signup");
   };
 
+  const onVerify = (recaptchaResponse) => {
+    setVerified(true);
+  };
+
   return (
     <Container maxWidth="xs" className="login-container">
       <div className="main-container">
@@ -127,6 +140,14 @@ export default function Login() {
                 size="small"
                 error={error?.password}
                 helperText={error?.password && "Please Enter Password"}
+              />
+            </Grid>
+          </Grid>
+          <Grid container justifyContent="center" sx={{ mt: 4 }}>
+            <Grid item>
+              <Reaptcha
+                sitekey={process.env.REACT_APP_SITE_KEY}
+                onVerify={onVerify}
               />
             </Grid>
           </Grid>
