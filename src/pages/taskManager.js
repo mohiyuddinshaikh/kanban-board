@@ -11,6 +11,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { Droppable } from "react-beautiful-dnd";
 import * as taskActions from "../store/reducers/tasks.slice";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteTask from "../components/DeleteTask";
 
 export default function TaskManager() {
   const dispatch = useDispatch();
@@ -21,6 +22,8 @@ export default function TaskManager() {
 
   const [addTask, setAddTask] = useState(false);
   const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [draggableId, setDraggableId] = useState(null);
 
   useEffect(() => {
     if (!user?.name) {
@@ -57,7 +60,8 @@ export default function TaskManager() {
     }
 
     if (destination.droppableId === "delete") {
-      dispatch(taskActions.deleteTask({ name: draggableId }));
+      setDraggableId(draggableId);
+      openDeleteDialog();
     } else {
       const updatedTasks = tasks.map((element) => {
         if (element.name === draggableId) {
@@ -78,6 +82,19 @@ export default function TaskManager() {
       return;
     }
     setShowDeleteIcon(true);
+  };
+
+  const handleDeleteTask = () => {
+    dispatch(taskActions.deleteTask({ name: draggableId }));
+    closeDeleteDialog();
+  };
+
+  const openDeleteDialog = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setShowDeleteDialog(false);
   };
 
   return (
@@ -133,6 +150,11 @@ export default function TaskManager() {
           open={addTask}
           closeForm={closeAddTask}
           openForm={handleAddTask}
+        />
+        <DeleteTask
+          open={showDeleteDialog}
+          handleClose={closeDeleteDialog}
+          onYes={handleDeleteTask}
         />
       </DragDropContext>
     </div>
