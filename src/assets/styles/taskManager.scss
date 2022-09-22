@@ -2,10 +2,6 @@ $textColor: #36454f;
 
 .tasks__container {
   padding: 30px 0px;
-  // display: flex;
-  // flex-wrap: wrap;
-  // background-color: antiquewhite;
-  // justify-content: space-around;
 }
 
 .task__container {
@@ -47,10 +43,26 @@ $textColor: #36454f;
     -moz-box-shadow: 0px 3px 5px -2px rgba(211, 211, 211, 1);
     box-shadow: 0px 3px 5px -2px rgba(211, 211, 211, 1);
 
+    .task__title {
+      padding: 7px 0;
+    }
+
     .icon__container {
       display: flex;
       justify-content: flex-end;
       gap: 8px;
+      padding-top: 10px;
+    }
+
+    .task__info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .clock__icon {
+        color: #899499;
+        padding-left: 5px;
+      }
     }
   }
 }

@@ -22,6 +22,10 @@ const TODO_COLOR = "#00aaff";
 const DONE_COLOR = "#3dcc3d";
 const ONGOING_COLOR = "#ffd426";
 
+const LOW_PRIORITY = "#89CFF0";
+const MEDIUM_PRIORITY = "#E49B0F";
+const HIGH_PRIORITY = "#C41E3A";
+
 export {
   dashboardDataContainers,
   totalStages,
@@ -32,4 +36,7 @@ export {
   TODO_COLOR,
   DONE_COLOR,
   ONGOING_COLOR,
+  LOW_PRIORITY,
+  MEDIUM_PRIORITY,
+  HIGH_PRIORITY,
 };

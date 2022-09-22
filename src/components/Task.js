@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../assets/styles/taskManager.scss";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
@@ -10,6 +9,11 @@ import { totalStages } from "../assets/constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import * as taskActions from "../store/reducers/tasks.slice";
 import AddTaskForm from "./AddTask";
+import FlagIcon from "@mui/icons-material/Flag";
+import Tooltip from "@mui/material/Tooltip";
+import { getFlagColor, getPriorityName } from "../helpers/helpers";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import moment from "moment";
 
 export default function Task(props) {
   const dispatch = useDispatch();
@@ -56,6 +60,21 @@ export default function Task(props) {
       {...taskDragHandleProp}
       ref={taskRefProp}
     >
+      <div className="task__info">
+        <Tooltip title={getPriorityName(task?.priority)} placement="top">
+          <FlagIcon
+            style={{
+              color: getFlagColor(task?.priority),
+            }}
+          />
+        </Tooltip>
+        <Tooltip
+          title={moment(task?.deadline).format("DD/MM/YYYY")}
+          placement="top"
+        >
+          <AccessTimeIcon className="clock__icon" />
+        </Tooltip>
+      </div>
       <div className="task__title">{task.name}</div>
       <div className="icon__container">
         <IconButton
