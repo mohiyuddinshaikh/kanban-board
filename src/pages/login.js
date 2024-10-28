@@ -120,7 +120,8 @@ export default function Login() {
               <TextField
                 fullWidth
                 id="lastName"
-                label="Username / Email"
+                label="Username / Email - (ned@stark.com)"
+                placeholder="ned@stark.com"
                 name="userName"
                 autoComplete="family-name"
                 size="small"
@@ -133,7 +134,8 @@ export default function Login() {
               <TextField
                 fullWidth
                 name="password"
-                label="Password"
+                label="Password - 123456"
+                placeholder="123456"
                 type="password"
                 id="password"
                 autoComplete="new-password"
