@@ -120,13 +120,14 @@ export default function Login() {
               <TextField
                 fullWidth
                 id="lastName"
-                label="Username / Email - (ned@stark.com)"
+                label="Username / Email"
                 placeholder="ned@stark.com"
                 name="userName"
                 autoComplete="family-name"
                 size="small"
                 error={error?.userName}
                 helperText={error?.userName && "Please Enter Username / Email"}
+                defaultValue="ned@stark.com"
               />
             </Grid>
 
@@ -134,7 +135,7 @@ export default function Login() {
               <TextField
                 fullWidth
                 name="password"
-                label="Password - 123456"
+                label="Password"
                 placeholder="123456"
                 type="password"
                 id="password"
@@ -142,6 +143,7 @@ export default function Login() {
                 size="small"
                 error={error?.password}
                 helperText={error?.password && "Please Enter Password"}
+                defaultValue={"123456"}
               />
             </Grid>
           </Grid>
